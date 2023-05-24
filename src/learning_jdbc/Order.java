@@ -73,8 +73,8 @@ public class Order {
 //		message += String.format("%7s %7s %7s %7s %7s %7s %7s %7s ","Code", "Order Date", "Region", 
 //				"Rep", "Item", "Units", "Unit Cost", "Total");
 //		message += "\n";
-		message += String.format("%7s %7s %7s %7s %7s %7s %7s %9s ", this.code, this.orderDate, this.Region,
-				this.rep, this.Item, this.units, this.unitCost, this.total);
+		message += String.format("%7s %7s %7s %7s %7s %7s %7s %9s ", this.getCode(), this.getOrderDate(), this.getRegion(),
+				this.getRep(), this.getItem(), this.getUnits(), this.getUnitCost(), this.getTotal());
 //		message += "\n------------------------";
 		return message;
 	}
