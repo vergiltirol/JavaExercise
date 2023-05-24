@@ -5,6 +5,10 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
+/**
+ * @author v.tirol
+ * Setting up connection to db
+ */
 public class DbConnection {
 	private final String url;
 	private final Properties properties;

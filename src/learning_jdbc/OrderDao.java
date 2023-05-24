@@ -7,20 +7,27 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+
 public class OrderDao extends Order {
 	
 	private final Connection connection;
-	private final static String GET_BY_CODE = "SELECT * FROM \"Orders\" where \"Code\" = ?"; 
-	private final static String GET_BY_REGION = "SELECT * FROM \"Orders\" where \"Region\" = ?"; 
+	private final static String GET_BY_CODE = "SELECT * FROM get_orders_by_code(?)";
+	private final static String GET_BY_REGION = "SELECT * FROM filter_orders_by_region(?)";
+	private final static String UPDATE = "UPDATE orders SET unitcost = ?, total = (units * ?) WHERE code = ?";
 	
 	public OrderDao(Connection connection) {
 		this.connection = connection;
 	}
 	
-	public Order getByCode(String Code) {
+	
+	/**
+	 * @param code
+	 * @return Order
+	 */
+	public Order getByCode(String code) {
 		Order order = new Order();
 		try(PreparedStatement statement = this.connection.prepareStatement(GET_BY_CODE);){
-			statement.setString(1, Code);
+			statement.setString(1, code);
 			ResultSet resultSet = statement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -40,12 +47,17 @@ public class OrderDao extends Order {
 		return order;
 	}
 	
-	public List<Order> getByRegion(String Region){
+	
+	/**
+	 * @param region
+	 * @return List of order
+	 */
+	public List<Order> getByRegion(String region) {
 		List<Order> orders = new ArrayList<>();
 		
 		
 		try(PreparedStatement statement = this.connection.prepareStatement(GET_BY_REGION);){
-			statement.setString(1, Region);
+			statement.setString(1, region);
 			ResultSet resultSet = statement.executeQuery();
 			while(resultSet.next()) {
 				Order order = new Order();
@@ -66,5 +78,34 @@ public class OrderDao extends Order {
 		
 		return orders;
 		
+	}
+
+	/**
+	 * Update order item
+	 * @param code
+	 * @param unitCost
+	 * @return Updated Order 
+	 */
+	public Order update(String code, double unitCost) {
+        try{
+            this.connection.setAutoCommit(false);
+        }catch(SQLException e){
+            e.printStackTrace();
+            throw new RuntimeException(e);
+        }
+		try(PreparedStatement statement = this.connection.prepareStatement(UPDATE);){
+			statement.setDouble(1, unitCost);
+			statement.setDouble(2, unitCost);
+			statement.setString(3, code);
+			statement.execute();
+			this.connection.commit();
+		}catch(SQLException e) {
+			try {
+				this.connection.rollback();
+			}catch(SQLException sqle) {
+				e.printStackTrace();
+			}
+		}
+		return this.getByCode(code);
 	}
 }
