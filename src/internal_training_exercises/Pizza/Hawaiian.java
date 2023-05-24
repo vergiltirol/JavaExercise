@@ -1,31 +1,14 @@
 package internal_training_exercises.Pizza;
 
-public class Hawaiian {
-	private String name;
-	private String description;
-	private double price;
-	private String ingredients;
-	private double discount;
-	
-	
+public class Hawaiian extends Pizza {
+	private static String name = "Hawaiian Pizza";
+	private static String description = "Hawaiian pizza is a pizza originating in Canada, and is traditionally topped with pineapple, tomato sauce, cheese, and either ham or bacon";
+	private static double price = 135;
+	private static String ingredients = "Ham \n" + "\t\tBacon \n" + "\t\tPineapple tidbits \n" + "\t\tMushroom \n" + "\t\tOnions \n"
+			+ "\t\tGreen Bell pepper";
+	private static double discount = 1;
+
 	public Hawaiian() {
-		this.name = "Hawaiian Pizza";
-		this.description = "Hawaiian pizza is a pizza originating in Canada, and is traditionally topped with pineapple, tomato sauce, cheese, and either ham or bacon";
-		this.price = 135;
-		this.ingredients = "Ham \n"
-				+ "\t\tBacon \n"
-				+ "\t\tPineapple tidbits \n"
-				+ "\t\tMushroom \n"
-				+ "\t\tOnions \n"
-				+ "\t\tGreen Bell pepper";
-		this.discount = 1;
-	}
-	
-	public void showPizzaDetails() {
-		System.out.println("Pizza name: \t" + name);
-		System.out.println("Description: \t" + description);
-		System.out.println("Price: \t\t" + price);
-		System.out.println("Ingredients: \t" + ingredients);
-		System.out.println("Discount: \t" + discount + "%");
+		super(name, description, price, ingredients, discount);
 	}
 }

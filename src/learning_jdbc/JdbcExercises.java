@@ -14,6 +14,7 @@ public class JdbcExercises {
 
 
 	public static void main(String[] args) {
+		//set DB connection
 		DbConnection dbCon = new DbConnection(DB_HOST, DB_NAME, DB_USERNAME, DB_PASSWORD);
 
 		Scanner scanner = new Scanner(System.in);
@@ -28,11 +29,15 @@ public class JdbcExercises {
 			boolean cont = false;
 			do {
 
+				//Show exercise menu
 				showMenu();
+				
+				
 				int choice = scanner.nextInt();
 				switch (choice) {
 				case 1:
-					
+					//Exercise 7
+					//Search by code
 					System.out.println("Enter code: ");
 					code = scanner.next();
 					order = orderDao.getByCode(code);
@@ -40,6 +45,8 @@ public class JdbcExercises {
 					System.out.println(order);
 					break;
 				case 2:
+					//Exercise 8
+					//Filter data by region
 					System.out.println("Enter region: ");
 					region = scanner.next();
 					List<Order> orders = orderDao.getByRegion(region.toLowerCase());
@@ -49,7 +56,8 @@ public class JdbcExercises {
 					}
 					break;
 				case 3:
-					
+					//Exercise 9
+					//Update data
 					System.out.println("Enter code: ");
 					code = scanner.next();
 					System.out.println("Enter new unit cost: ");
