@@ -12,8 +12,9 @@ public class Exercise3 {
 			boolean cont = true;
 			do {
 				double mass, density, volume;
-				System.out.println("Which one would you like to calculate? \n" 
+				System.out.println("Which one would you like to calculate? Vergil \n" 
 				+ "A. Density \nB. Mass \nC. Volume");
+				
 				String choice = scanner.next();
 
 				switch (choice.toLowerCase()) {
