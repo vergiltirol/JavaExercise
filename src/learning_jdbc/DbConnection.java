@@ -7,7 +7,7 @@ import java.util.Properties;
 
 /**
  * @author v.tirol
- * Setting up connection to db
+ * Setting up connection to database
  */
 public class DbConnection {
 	private final String url;

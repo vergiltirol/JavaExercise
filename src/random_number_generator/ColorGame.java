@@ -2,9 +2,6 @@ package random_number_generator;
 
 import java.util.Random;
 import java.util.Scanner;
-
-import javax.swing.plaf.synth.SynthOptionPaneUI;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -42,8 +39,12 @@ public class ColorGame {
 
 				userInput.add(getIndexOfColors(color));
 
-				System.out.println("Bet more colors? Y/N");
-				addMoreColor = scan.next().toLowerCase().equals("y") ? true : false;
+				if(userInput.size() + 1 <= 3) {
+					System.out.println("Bet more colors? Y/N");
+					addMoreColor = scan.next().toLowerCase().equals("y") ? true : false;
+				}else {
+					addMoreColor = false;
+				}
 			} while (addMoreColor);
 
 			int r = 0;
@@ -58,7 +59,7 @@ public class ColorGame {
 			int winCount = getWinCount(userInput, winningColors);
 
 			int initialMoney = 35;
-			int money = printSomething(winCount, userInput.size(), initialMoney);
+			int money = printWinnings(winCount, userInput.size(), initialMoney);
 
 			if (money < 15) {
 				System.out.println("Out of money");
@@ -96,7 +97,7 @@ public class ColorGame {
 		}
 	}
 
-	protected static int printSomething(int winCount, int betCount, int money) {
+	protected static int printWinnings(int winCount, int betCount, int money) {
 		int perBet = 5;
 		int winningRate = 3;
 		int winnings = 0;

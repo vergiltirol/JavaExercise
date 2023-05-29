@@ -31,6 +31,7 @@ public class OrderDao extends Order {
 			ResultSet resultSet = statement.executeQuery();
 			
 			while(resultSet.next()) {
+				order.setId(resultSet.getInt(1));
 				order.setCode(resultSet.getString(2));
 				order.setOrderDate(resultSet.getString(3));
 				order.setRegion(resultSet.getString(4));
@@ -87,25 +88,27 @@ public class OrderDao extends Order {
 	 * @return Updated Order 
 	 */
 	public Order update(String code, double unitCost) {
-        try{
-            this.connection.setAutoCommit(false);
-        }catch(SQLException e){
-            e.printStackTrace();
-            throw new RuntimeException(e);
-        }
+//        try{
+//            this.connection.setAutoCommit(false);
+//        }catch(SQLException e){
+//            e.printStackTrace();
+//            throw new RuntimeException(e);
+//        }
 		try(PreparedStatement statement = this.connection.prepareStatement(UPDATE);){
 			statement.setDouble(1, unitCost);
 			statement.setDouble(2, unitCost);
 			statement.setString(3, code);
 			statement.execute();
-			this.connection.commit();
+			//this.connection.commit();
 		}catch(SQLException e) {
-			try {
-				this.connection.rollback();
-			}catch(SQLException sqle) {
-				e.printStackTrace();
-			}
+//			try {
+//				this.connection.rollback();
+//			}catch(SQLException sqle) {
+//				e.printStackTrace();
+//			}
 		}
 		return this.getByCode(code);
 	}
+	
+	
 }
