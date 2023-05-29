@@ -34,6 +34,7 @@ public class Exercise7 {
 					System.out.println("No result found.");
 				}
 				else {
+					System.out.println("Data Updated.");
 					showTableHeader();
 					System.out.println(order);
 					
