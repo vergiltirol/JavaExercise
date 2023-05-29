@@ -26,7 +26,13 @@ public class ColorGame {
 		Scanner scan = new Scanner(System.in);
 		boolean cont = false;
 
+		int initialMoney = 100;
+		System.out.println("Your initial money: " + 100);
+		
 		do {
+
+
+
 			showColorMenu();
 
 			List<Integer> userInput = new ArrayList<>();
@@ -39,15 +45,16 @@ public class ColorGame {
 
 				userInput.add(getIndexOfColors(color));
 
-				if(userInput.size() + 1 <= 3) {
+				if (userInput.size() + 1 <= 3) {
 					System.out.println("Bet more colors? Y/N");
 					addMoreColor = scan.next().toLowerCase().equals("y") ? true : false;
-				}else {
+				} else {
 					addMoreColor = false;
 				}
 			} while (addMoreColor);
 
 			int r = 0;
+			System.out.println("WINNING COLORS ARE: ");
 			for (int i = 0; i < 3; i++) {
 				r = random.nextInt(6);
 				roulette(r);
@@ -58,7 +65,6 @@ public class ColorGame {
 
 			int winCount = getWinCount(userInput, winningColors);
 
-			int initialMoney = 35;
 			int money = printWinnings(winCount, userInput.size(), initialMoney);
 
 			if (money < 15) {
@@ -126,7 +132,7 @@ public class ColorGame {
 	}
 
 	protected static void roulette(int r) {
-		System.out.println("WINNING COLOR IS: " + ANSI_BOLD + COLOR_WHEEL[r] + COLORS[r].toUpperCase() + ANSI_RESET);
+		System.out.println("\t " + ANSI_BOLD + COLOR_WHEEL[r] + COLORS[r].toUpperCase() + ANSI_RESET);
 
 	}
 
